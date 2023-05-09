@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title%} Liste des Articles par prix{% endblock %}
 {% block body %}
+<div class="container mt-5">
 {{ form_start(form) }}
 <div class="form-row align-items-end" >
 <div class="col">
@@ -45,4 +46,5 @@ onclick="return confirm('Etesvous sûr de supprimer cet article?');">Supprimer</
 {% else %}
 <p>Aucun articles</p>
 {% endif %}
+</div>
 {% endblock %}

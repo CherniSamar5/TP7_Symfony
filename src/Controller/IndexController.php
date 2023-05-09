@@ -150,4 +150,3 @@ class IndexController extends AbstractController
         return $this->render('articles/articlesParPrix.html.twig',[ 'form' =>$form->createView(), 'articles' => $articles]);
     }
 }
-

@@ -15,11 +15,23 @@ class Article
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true ,type:"string")]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        min: 5,
+        max: 50,
+        minMessage: "Le nom d'un article doit comporter au moins {{ limit }} caractères.",
+        maxMessage: "Le nom d'un article doit comporter au plus {{ limit }} caractères."
+    )]
     private ?string $Nom = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Assert\NotEqualTo(value : 0,message : "Le prix d’un article ne doit pas être égal à 0 "
+    )]
     private ?string $Prix = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
@@ -52,10 +64,6 @@ class Article
     {
         return $this->getNom()??''; // or any other property or method that returns a string
     }
-
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-        #[ORM\JoinColumn(nullable: false)]
-        private ?Category $category = null;
 
 
     public function getCategory(): ?Category
